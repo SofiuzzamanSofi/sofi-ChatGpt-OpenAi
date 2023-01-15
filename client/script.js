@@ -93,10 +93,21 @@ const handleSubmit = async e => {
 
   // users's chatstripe---
   // define/get a from/"DIV" from HTML--to show outpur data from backend--
+  // created chatStripe for use =(false) =--
+  // data.get(promt) = data = form, .get()=method of javascript to get data from the form, "promt"= input textArea name--
+  // name "name"= evabe likhle tar velu pawa jai
   chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
 
   form.reset();
 
   //bot's chatstripe
-  const iniqueId = generateUniqueId();
+  // get uniqueId function for each each/unique search ---
+  const uniqueId = generateUniqueId();
+  chatContainer.innerHTML += chatStripe(true, "", uniqueId)
+
+  // scrollbar auto ---
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  const messageDiv = document.getElementById(uniqueId);
+  loader(messageDiv);
 }
