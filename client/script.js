@@ -1,12 +1,19 @@
 import bot from "./assets/bot.svg"
 import user from "./assets/user.svg"
 
+
+
+
+// get input text from searchbar---
 const form = document.querySelector("form");
+// get div to write ans from the backen-api-Ai message---
 const chatContainer = document.querySelector("#chat_container")
 
-let loadInterval;
+
+
 
 // loading . . . for loading time fro get data from backend---
+let loadInterval;
 function loader(element) {
   element.textContent = "";
   loadInterval = setImmediate(() => {
@@ -17,6 +24,8 @@ function loader(element) {
     }
   }, 300)
 }
+
+
 
 // type text from ai backend one by one work-------
 function typeText(element, text) {
@@ -49,7 +58,6 @@ function generateUniqueId() {
 
 // chat stripe chat bot iconn and written ---
 function chatStripe(isAi, value, uniqueId) {
-
   return (
     `
     <div class="wrapper ${isAi && 'ai'}">
@@ -73,4 +81,19 @@ function chatStripe(isAi, value, uniqueId) {
 }
 
 
+
+
 // Ai generated response --
+const handleSubmit = async e => {
+  e.preventDefault();
+
+  // get input text from searchbar---
+  const data = new FormData(form);
+
+
+  // users's chatstripe---
+  // define/get a from/"DIV" from HTML--to show outpur data from backend--
+  chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
+
+  form.reset();
+}

@@ -4,16 +4,15 @@ site Name-
 
 
 Project Live site link: [sofi-ChatGpt-OpenAI](https://sofi-chat-gpt-open-ai.vercel.app).
+
+
 - 
 - Project Server site link: [sofi-ChatGpt-OpenAI](https://sofi-chatgpt-ai.onrender.com).
-
-
 - GitHub Link: [Both-Client-Server](https://github.com/SofiuzzamanSofi/sofi-ChatGpt-OpenAi)
-
 - 
 
 
-## Contributing
+## Contributing-
 
 ### Frontend
 - Vite
