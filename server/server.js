@@ -32,7 +32,7 @@ app.post("/", async (req, res) => {
     try {
         const prompt = req.body.prompt;
         // text-davinchi-003 --- ( open ai api- )
-        const respose = await openai.createCompletion({
+        const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: `${prompt}`,
             temperature: 0,
@@ -41,13 +41,16 @@ app.post("/", async (req, res) => {
             frequency_penalty: 0.5,
             presence_penalty: 0,
         })
-
+        res.status(200).send({
+            bot: response.data.choices[0].text,
+        })
 
     } catch (error) {
         console.log(`error from try > catch function: ${error}`.bgRed)
+        res.status(500).send({ error })
     }
 })
 
 
 
-app.listen()
+app.listen(5000, () => console.log("Server is running on port http://localhost:5000".bgCyan))

@@ -13,9 +13,9 @@ const chatContainer = document.querySelector("#chat_container")
 
 
 // loading . . . for loading time fro get data from backend---
+let loadInterval;
 function loader(element) {
   element.textContent = "";
-  let loadInterval;
   loadInterval = setInterval(() => {
     element.textContent += ".";
 
@@ -108,9 +108,40 @@ const handleSubmit = async e => {
   // scrollbar auto ---
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
+  // start loading "..."--- 
   const messageDiv = document.getElementById(uniqueId);
-  console.log(messageDiv);
+  // console.log(messageDiv);
   loader(messageDiv);
+
+
+  //fetch data from server ---
+  const response = await fetch("http://localhost:5000", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      prompt: data.get("prompt"),
+    })
+  })
+
+  // stop loading "..."---
+  clearInterval(loadInterval);
+
+  // set ans to the div and display ans. ---
+  messageDiv.innerHTML = "";
+
+  if (response.ok) {
+    const data = await response.json();
+    const parseData = data.bot.trim();
+
+    typeText(messageDiv, data)
+  } else {
+    const error = await response.text();
+    messageDiv.innerHTML = "Something went wrong.",
+      alert(error);
+  }
+
 }
 
 
