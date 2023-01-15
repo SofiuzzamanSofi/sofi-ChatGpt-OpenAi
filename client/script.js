@@ -96,4 +96,7 @@ const handleSubmit = async e => {
   chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
 
   form.reset();
+
+  //bot's chatstripe
+  const iniqueId = generateUniqueId();
 }
