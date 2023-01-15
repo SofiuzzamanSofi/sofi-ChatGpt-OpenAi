@@ -31,7 +31,16 @@ app.post("/", async (req, res) => {
 
     try {
         const prompt = req.body.prompt;
-
+        // text-davinchi-003 --- ( open ai api- )
+        const respose = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: `${prompt}`,
+            temperature: 0,
+            max_tokens: 3000,
+            top_p: 1,
+            frequency_penalty: 0.5,
+            presence_penalty: 0,
+        })
 
 
     } catch (error) {
