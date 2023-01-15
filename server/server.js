@@ -1,36 +1,41 @@
-import express from "express";
-import * as dotenv from "dotenv";
-import cors from "cors";
+import express from 'express'
+import * as dotenv from 'dotenv'
+import cors from 'cors'
 import colors from "colors";
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi } from 'openai'
 
 // inishilized the app---
-const app = express();
+const app = express()
 // initialized the env file ---
-dotenv.config();
+dotenv.config()
 
 // middleware---
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
+
 
 const configuration = new Configuration({
-    apiKey: process.env.OPEN_API_KEY,
-})
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
-const openai = new OpenAIApi(configuration)
 
-app.get("/", async (req, res) => {
+console.log(process.env.OPENAI_API_KEY)
+
+const openai = new OpenAIApi(configuration);
+
+app.get('/', async (req, res) => {
     res.status(200).send({
         success: true,
-        message: "Hello World",
+        message: 'Hello from CodeX!'
     })
 })
 
 
-app.post("/", async (req, res) => {
-
+app.post('/', async (req, res) => {
     try {
         const prompt = req.body.prompt;
+
+        console.log(prompt)
         // text-davinchi-003 --- ( open ai api- )
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -41,16 +46,18 @@ app.post("/", async (req, res) => {
             frequency_penalty: 0.5,
             presence_penalty: 0,
         })
+        console.log(response.data.choices[0].text);
+
         res.status(200).send({
-            bot: response.data.choices[0].text,
-        })
+            bot: response.data.choices[0].text
+        });
 
     } catch (error) {
         console.log(`error from try > catch function: ${error}`.bgRed)
-        res.status(500).send({ error })
+        res.status(500).send({ error } || 'Something went wrong');
     }
 })
 
 
 
-app.listen(5000, () => console.log("Server is running on port http://localhost:5000".bgCyan))
+app.listen(5001, () => console.log('AI server started on http://localhost:5001'.bgCyan))

@@ -13,18 +13,19 @@ const chatContainer = document.querySelector("#chat_container")
 
 
 // loading . . . for loading time fro get data from backend---
-let loadInterval;
+let loadInterval
+
 function loader(element) {
-  element.textContent = "";
+  element.textContent = ''
+
   loadInterval = setInterval(() => {
-    element.textContent += ".";
+    element.textContent += '.';
 
-    if (element.textContent === "....") {
-      element.textContent = "";
+    if (element.textContent === '....') {
+      element.textContent = '';
     }
-  }, 300)
+  }, 300);
 }
-
 
 
 // type text from ai backend one by one work-------
@@ -33,7 +34,7 @@ function typeText(element, text) {
 
   let interval = setInterval(() => {
     if (index < text.length) {
-      element.innerHTML += text.chartAt(index);
+      element.innerHTML += text.charAt(index);
       index++;
     }
     else {
@@ -134,8 +135,8 @@ const handleSubmit = async e => {
   if (response.ok) {
     const data = await response.json();
     const parseData = data.bot.trim();
-
-    typeText(messageDiv, data)
+    console.log({ parseData })
+    typeText(messageDiv, parseData)
   } else {
     const error = await response.text();
     messageDiv.innerHTML = "Something went wrong.",
