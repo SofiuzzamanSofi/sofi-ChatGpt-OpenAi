@@ -13,10 +13,10 @@ const chatContainer = document.querySelector("#chat_container")
 
 
 // loading . . . for loading time fro get data from backend---
-let loadInterval;
 function loader(element) {
   element.textContent = "";
-  loadInterval = setImmediate(() => {
+  let loadInterval;
+  loadInterval = setInterval(() => {
     element.textContent += ".";
 
     if (element.textContent === "....") {
@@ -70,7 +70,7 @@ function chatStripe(isAi, value, uniqueId) {
           />
         </div>
 
-        <div class="message" id=${uniqueId}>
+        <div class="message" id=${uniqueId ? uniqueId : ""}>
          ${value}
         </div>
 
@@ -103,12 +103,13 @@ const handleSubmit = async e => {
   //bot's chatstripe
   // get uniqueId function for each each/unique search ---
   const uniqueId = generateUniqueId();
-  chatContainer.innerHTML += chatStripe(true, "", uniqueId)
+  chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
 
   // scrollbar auto ---
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
   const messageDiv = document.getElementById(uniqueId);
+  console.log(messageDiv);
   loader(messageDiv);
 }
 
