@@ -21,7 +21,7 @@ const configuration = new Configuration({
 
 console.log(process.env.OPENAI_API_KEY)
 
-const openai = new OpenAIApi(configuration);
+const openAI = new OpenAIApi(configuration);
 
 app.get('/', async (req, res) => {
     res.status(200).send({
@@ -37,7 +37,7 @@ app.post('/', async (req, res) => {
 
         console.log(prompt)
         // text-davinchi-003 --- ( open ai api- )
-        const response = await openai.createCompletion({
+        const response = await openAI.createCompletion({
             model: "text-davinci-003",
             prompt: `${prompt}`,
             temperature: 0,

@@ -30,14 +30,13 @@ function loader(element) {
 
 // type text from ai backend one by one work-------
 function typeText(element, text) {
-  let index = 0;
+  let index = 0
 
   let interval = setInterval(() => {
     if (index < text.length) {
-      element.innerHTML += text.charAt(index);
-      index++;
-    }
-    else {
+      element.innerHTML += text.charAt(index)
+      index++
+    } else {
       clearInterval(interval)
     }
   }, 20)
@@ -61,23 +60,20 @@ function generateUniqueId() {
 function chatStripe(isAi, value, uniqueId) {
   return (
     `
-    <div class="wrapper ${isAi && 'ai'}">
-      <div class="chat">
-
-        <div class="profile">
-          <img
-            src="${isAi ? bot : user}"
-            alt="${isAi ? "bot" : "user"}"
-          />
-        </div>
-
-        <div class="message" id=${uniqueId ? uniqueId : ""}>
-         ${value}
-        </div>
-
+      <div class="wrapper ${isAi && 'ai'}">
+          <div class="chat">
+              <div class="profile">
+                  <img 
+                    src=${isAi ? bot : user} 
+                    alt="${isAi ? 'bot' : 'user'}" 
+                  />
+              </div>
+              <div class="message" id=${uniqueId ? uniqueId : ""}>
+              ${value}
+              </div>
+          </div>
       </div>
-    </div>
-    `
+  `
   )
 }
 
@@ -85,11 +81,11 @@ function chatStripe(isAi, value, uniqueId) {
 
 
 // Ai generated response --
-const handleSubmit = async e => {
-  e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault()
 
   // get input text from searchbar---
-  const data = new FormData(form);
+  const data = new FormData(form)
 
 
   // users's chatstripe---
@@ -97,52 +93,57 @@ const handleSubmit = async e => {
   // created chatStripe for use =(false) =--
   // data.get(promt) = data = form, .get()=method of javascript to get data from the form, "promt"= input textArea name--
   // name "name"= evabe likhle tar velu pawa jai
-  chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
+  chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
 
-  form.reset();
+  form.reset()
 
   //bot's chatstripe
   // get uniqueId function for each each/unique search ---
-  const uniqueId = generateUniqueId();
+  const uniqueId = generateUniqueId()
   chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
 
-  // scrollbar auto ---
+  // scrollbar auto for input from scrollbar ---
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
   // start loading "..."--- 
-  const messageDiv = document.getElementById(uniqueId);
-  // console.log(messageDiv);
-  loader(messageDiv);
+  const messageDiv = document.getElementById(uniqueId)
+
+
+  // loading ... show 
+  loader(messageDiv)
 
 
   //fetch data from server ---
-  const response = await fetch("http://localhost:5000", {
-    method: "POST",
+  const response = await fetch('http://localhost:5000', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      prompt: data.get("prompt"),
+      prompt: data.get('prompt')
     })
   })
 
   // stop loading "..."---
-  clearInterval(loadInterval);
+  clearInterval(loadInterval)
 
   // set ans to the div and display ans. ---
-  messageDiv.innerHTML = "";
+  messageDiv.innerHTML = " "
+
 
   if (response.ok) {
     const data = await response.json();
-    const parseData = data.bot.trim();
-    console.log({ parseData })
-    typeText(messageDiv, parseData)
-  } else {
-    const error = await response.text();
-    messageDiv.innerHTML = "Something went wrong.",
-      alert(error);
-  }
+    const parsedData = data.bot.trim() // trims any trailing spaces/'\n' 
 
+
+    // insert data/ text from the api backend on client show---
+    typeText(messageDiv, parsedData)
+  } else {
+    const err = await response.text()
+
+    messageDiv.innerHTML = "Something went wrong"
+    alert(err)
+  }
 }
 
 
