@@ -111,3 +111,14 @@ const handleSubmit = async e => {
   const messageDiv = document.getElementById(uniqueId);
   loader(messageDiv);
 }
+
+
+form.addEventListener("submit", handleSubmit);
+
+// active on ENTER button ---
+form.addEventListener("keyup", (e) => {
+  // if(e.keyCode === 13){
+  if (e.key === "Enter") {
+    handleSubmit(e);
+  }
+})
