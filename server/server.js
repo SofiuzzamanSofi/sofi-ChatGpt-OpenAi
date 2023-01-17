@@ -20,6 +20,7 @@ const configuration = new Configuration({
 
 
 console.log(process.env.OPENAI_API_KEY)
+console.log("process.env.OPENAI_API_KEY")
 
 const openAI = new OpenAIApi(configuration);
 
@@ -35,7 +36,7 @@ app.post('/', async (req, res) => {
     try {
         const prompt = req.body.prompt;
 
-        console.log(prompt)
+        console.log({ prompt })
         // text-davinchi-003 --- ( open ai api- )
         const response = await openAI.createCompletion({
             model: "text-davinci-003",
@@ -46,7 +47,7 @@ app.post('/', async (req, res) => {
             frequency_penalty: 0.5,
             presence_penalty: 0,
         })
-        console.log(response.data.choices[0].text);
+        // console.log(response.bgCyan);
 
         res.status(200).send({
             bot: response.data.choices[0].text
@@ -60,4 +61,4 @@ app.post('/', async (req, res) => {
 
 
 
-app.listen(5001, () => console.log('AI server started on http://localhost:5001'.bgCyan))
+app.listen(5000, () => console.log('AI server started on http://localhost:5000'.bgCyan))
