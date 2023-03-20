@@ -2,7 +2,6 @@ site Name-
 # Sofiuzzaman Sofi - ChatGPT || OpenAi 
 
 
-![image](https://user-images.githubusercontent.com/108426827/226465899-3fde9b77-0e27-41e2-9075-671b209a2a9f.png)
 
 Project Live site link: [sofi-ChatGpt-OpenAI](https://sofi-chat-gpt-open-ai.vercel.app).
 
@@ -12,6 +11,8 @@ Project Live site link: [sofi-ChatGpt-OpenAI](https://sofi-chat-gpt-open-ai.verc
 - GitHub Link: [Both-Client-Server](https://github.com/SofiuzzamanSofi/sofi-ChatGpt-OpenAi)
 - 
 
+
+![image](https://user-images.githubusercontent.com/108426827/226465899-3fde9b77-0e27-41e2-9075-671b209a2a9f.png)
 
 ## Contributing-
 
