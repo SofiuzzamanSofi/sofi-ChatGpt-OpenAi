@@ -116,7 +116,7 @@ const handleSubmit = async (e) => {
   // console.log({ name: data.get('prompt') })
 
   //fetch data from server ---
-  const response = await fetch('http://localhost:5000', {
+  const response = await fetch('https://sofi-chatgpt-ai.onrender.com/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
