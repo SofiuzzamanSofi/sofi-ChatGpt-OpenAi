@@ -84,9 +84,11 @@ function chatStripe(isAi, value, uniqueId) {
 // Ai generated response --
 const handleSubmit = async (e) => {
   e.preventDefault()
-
   // get input text from searchbar---
   const data = new FormData(form)
+  const inputDataText = document.getElementById('prompt').value;
+  console.log({ inputDataText });
+
 
   // user's chatstripe
   // users's chatstripe---
@@ -118,7 +120,7 @@ const handleSubmit = async (e) => {
   loader(messageDiv)
 
 
-  console.log({ name: data.get('prompt') })
+  // console.log({ name: data.get('prompt') })
 
   //fetch data from server ---
   const response = await fetch('http://localhost:5000', {
@@ -127,7 +129,7 @@ const handleSubmit = async (e) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      prompt: data.get('prompt')
+      prompt: inputDataText,
     })
   })
 
@@ -155,8 +157,8 @@ const handleSubmit = async (e) => {
 
 
 // active on ENTER button ---
-form.addEventListener('submit', handleSubmit)
-form.addEventListener('keyup', (e) => {
+// form.addEventListener('submit', handleSubmit)
+form.addEventListener('keydown', (e) => {
   // if(e.keyCode === 13){
   if (e.key === "Enter") {
     handleSubmit(e)

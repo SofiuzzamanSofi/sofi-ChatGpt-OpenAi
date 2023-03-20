@@ -19,8 +19,7 @@ const configuration = new Configuration({
 });
 
 
-console.log(process.env.OPENAI_API_KEY)
-console.log("process.env.OPENAI_API_KEY")
+
 
 const openAI = new OpenAIApi(configuration);
 
@@ -36,7 +35,7 @@ app.post('/', async (req, res) => {
     try {
         const prompt = req.body.prompt;
 
-        console.log({ prompt })
+        // console.log({ prompt })
         // text-davinchi-003 --- ( open ai api- )
         const response = await openAI.createCompletion({
             model: "text-davinci-003",
