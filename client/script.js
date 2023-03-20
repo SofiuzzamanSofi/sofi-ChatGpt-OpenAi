@@ -87,15 +87,8 @@ const handleSubmit = async (e) => {
   // get input text from searchbar---
   const data = new FormData(form)
   const inputDataText = document.getElementById('prompt').value;
-  console.log({ inputDataText });
+  // console.log({ inputDataText });
 
-
-  // user's chatstripe
-  // users's chatstripe---
-  // define/get a from/"DIV" from HTML--to show outpur data from backend--
-  // created chatStripe for use =(false) =--
-  // data.get(promt) = data = form, .get()=method of javascript to get data from the form, "promt"= input textArea name--
-  // name "name"= evabe likhle tar velu pawa jai
   chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
 
   // to clear the textarea input 
